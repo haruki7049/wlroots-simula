@@ -1,6 +1,6 @@
-{ stdenv, lib, fetchFromGitHub, meson, ninja, pkgconfig, fetchpatch
+{ stdenv, lib, fetchFromGitHub, meson, ninja, fetchpatch
 , wayland, libGL, wayland-protocols, libinput, libxkbcommon, pixman
-, xcbutilwm, libX11, libcap, xcbutilimage, xcbutilerrors, mesa
+, xcbutilwm, libcap, xcbutilimage, xcbutilerrors, mesa
 , libpng, ffmpeg_4, autoreconfHook, xorg, libbsd, pkg-config, python310
 }:
 
@@ -18,18 +18,27 @@ stdenv.mkDerivation rec {
   # $out for the library and $examples for the example programs (in examples):
   outputs = [ "out" "examples" ];
 
-  nativeBuildInputs = [ meson ninja pkgconfig ];
+  nativeBuildInputs = [ meson ninja pkg-config ];
 
   buildInputs = [
     wayland libGL wayland-protocols libinput libxkbcommon pixman
-    xcbutilwm libX11 libcap xcbutilimage xcbutilerrors mesa
+    xcbutilwm libcap xcbutilimage xcbutilerrors mesa
     libpng ffmpeg_4 libxcb-errors
+	xorg.libX11.dev
+	xorg.libxcb.dev
+    xorg.xinput
   ];
 
   mesonFlags = [
     "-Dlibcap=enabled" "-Dlogind=enabled" "-Dxwayland=enabled" "-Dx11-backend=enabled"
     "-Dxcb-icccm=disabled" "-Dxcb-errors=enabled"
   ];
+
+  LDFLAGS = [
+	  "-lX11-xcb"
+	  "-lxcb-xinput"
+  ];
+
 
   postInstall = ''
     # Copy the library to $examples
