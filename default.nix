@@ -28,7 +28,6 @@ let
 in
 
 stdenv.mkDerivation rec {
-  name = "wlroots";
   pname = "wlroots";
   version = "0.10.0";
 
