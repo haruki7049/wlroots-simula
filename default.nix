@@ -100,10 +100,9 @@ stdenv.mkDerivation rec {
   '';
 
   meta = with lib; {
-    description = "A modular Wayland compositor library";
-    inherit (src.meta) homepage;
+    description = "More or less a pinned version of wlroots that Simula can use (with a few patches)";
+    homepage = "https://github.com/SimulaVR/wlroots";
     license = licenses.mit;
     platforms = platforms.linux;
-    maintainers = with maintainers; [ primeos ];
   };
 }
