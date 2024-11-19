@@ -1,10 +1,9 @@
 {
   stdenv,
   lib,
-  fetchFromGitHub,
+  callPackage,
   meson,
   ninja,
-  fetchpatch,
   wayland,
   libGL,
   wayland-protocols,
@@ -18,23 +17,12 @@
   mesa,
   libpng,
   ffmpeg_4,
-  autoreconfHook,
   xorg,
-  libbsd,
   pkg-config,
-  python310,
 }:
 
 let
-  libxcb-errors = import ./libxcb-errors/libxcb-errors.nix {
-    stdenv = stdenv;
-    lib = lib;
-    pkg-config = pkg-config;
-    autoreconfHook = autoreconfHook;
-    xorg = xorg;
-    libbsd = libbsd;
-    python310 = python310;
-  };
+  libxcb-errors = callPackage ./libxcb-errors/libxcb-errors.nix { };
 in
 
 stdenv.mkDerivation rec {
