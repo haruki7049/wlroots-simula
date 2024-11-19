@@ -3,6 +3,7 @@
   lib,
   callPackage,
   meson,
+  cmake,
   ninja,
   wayland,
   libGL,
@@ -19,6 +20,7 @@
   ffmpeg_4,
   xorg,
   pkg-config,
+  wayland-scanner,
 }:
 
 let
@@ -40,8 +42,10 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = [
     meson
+    cmake
     ninja
     pkg-config
+    wayland-scanner
   ];
 
   buildInputs = [
