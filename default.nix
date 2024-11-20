@@ -21,11 +21,8 @@
   xorg,
   pkg-config,
   wayland-scanner,
+  libxcb-errors ? callPackage ./libxcb-errors { },
 }:
-
-let
-  libxcb-errors = callPackage ./libxcb-errors { };
-in
 
 stdenv.mkDerivation rec {
   pname = "wlroots";
