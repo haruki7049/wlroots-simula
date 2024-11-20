@@ -24,7 +24,7 @@
 }:
 
 let
-  libxcb-errors = callPackage ./libxcb-errors/libxcb-errors.nix { };
+  libxcb-errors = callPackage ./libxcb-errors { };
 in
 
 stdenv.mkDerivation rec {
